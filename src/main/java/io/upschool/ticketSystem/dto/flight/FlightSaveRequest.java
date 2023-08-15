@@ -1,0 +1,32 @@
+package io.upschool.ticketSystem.dto.flight;
+
+import io.upschool.ticketSystem.entity.Airplane;
+import io.upschool.ticketSystem.entity.Airport;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+public class FlightSaveRequest {
+
+    @NotBlank
+    @NotEmpty
+    @NotNull
+    private String flightNumber;
+
+
+    private long originAirportId;
+
+    private long destinationAirportId;
+
+
+    private long airplaneId;
+
+
+}
