@@ -1,11 +1,14 @@
 package io.upschool.ticketSystem.controller;
 
+import io.upschool.ticketSystem.dto.NotOkResponse;
 import io.upschool.ticketSystem.dto.airport.*;
 import io.upschool.ticketSystem.exception.ResourceNotFoundException;
 import io.upschool.ticketSystem.service.AirportService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +22,11 @@ public class AirportController {
     private final AirportService airportService;
 
     @PostMapping()
-    public ResponseEntity<AirportSaveResponse> addAirport(@RequestBody AirportSaveRequest request) {
+    public ResponseEntity<AirportSaveResponse> addAirport(@Valid @RequestBody AirportSaveRequest request, Errors errors) {
+
+        if (errors.hasErrors()) {
+            return new ResponseEntity(new NotOkResponse(400, errors), HttpStatus.BAD_REQUEST);
+        }
 
         var response = airportService.save(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -41,7 +48,11 @@ public class AirportController {
     }
 
     @PutMapping()
-    public ResponseEntity<AirportUpdateResponse> updateAirport(@RequestBody AirportUpdateRequest updateRequest) throws ResourceNotFoundException {
+    public ResponseEntity<AirportUpdateResponse> updateAirport(@Valid @RequestBody AirportUpdateRequest updateRequest, Errors errors) throws ResourceNotFoundException {
+
+        if (errors.hasErrors()) {
+            return new ResponseEntity(new NotOkResponse(400, errors), HttpStatus.BAD_REQUEST);
+        }
 
         var response = airportService.updateAirport(updateRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response.get());

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public abstract class CustomException extends Exception{
     @Getter
-    private int statusCode;
+    private final int statusCode;
 
     public CustomException(String message, int statusCode) {
         super(message);

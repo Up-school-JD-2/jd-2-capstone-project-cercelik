@@ -25,7 +25,6 @@ public class Airplane {
     private String name;
 
     @Column(name= "capacity", nullable=false)
-    @Size(min=180, max=800)
     private long capacity;
 
 

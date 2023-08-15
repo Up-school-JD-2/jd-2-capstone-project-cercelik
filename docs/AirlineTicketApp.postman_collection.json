@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "e96f4c59-8d0d-4c80-8b8d-969d2ad1f5e4",
+		"name": "AirlineTicketApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "821573"
+	},
+	"item": [
+		{
+			"name": "airport",
+			"item": [
+				{
+					"name": "SaveAirport",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \n  \"name\": \"İstanbul-Havalimanı\",\n  \"city\": \"İstanbul\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airports",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAirport",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"name\" : \"İstanbul Havalimanı\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airports",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAirport",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/airports",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airports"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "airline-company",
+			"item": [
+				{
+					"name": "SaveAirlineCompany",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Türk Hava Yolları\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airline-companies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airline-companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAirlineCompany",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"name\": \"THY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airline-companies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airline-companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllAirlineCompanies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/airline-companies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airline-companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchAirlineCompanyById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/airline-companies/{{searchirlineCompanyById}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airline-companies",
+								"{{searchirlineCompanyById}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchAirlineCompany",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"name\": \"Türk Hava Yolları\"\n  }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airline-companies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airline-companies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "airplane",
+			"item": [
+				{
+					"name": "SaveAirplane",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Airbus A330-700\",\n  \"capacity\": 3,\n  \"airlineCompanyID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airplanes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airplanes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllAirplanes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/airplanes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airplanes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchAirplane",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"name\": \"Airbus A330-200\"\n  }\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/airplanes/search?name={{searchAirplaneByName}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airplanes",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{searchAirplaneByName}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAirplaneById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/airplanes/{{airplaneId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"airplanes",
+								"{{airplaneId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "flight",
+			"item": [
+				{
+					"name": "SaveFlight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"flightNumber\": \"tk207\",\n  \"originAirportId\": 1,\n  \"destinationAirportId\": 2,\n  \"airplaneId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/flights",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllFlight",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/flights",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchFlights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/flights/search?origin={{flightSearchOrigin}}&destination={{flightSearchOrigin}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"flights",
+								"search"
+							],
+							"query": [
+								{
+									"key": "origin",
+									"value": "{{flightSearchOrigin}}"
+								},
+								{
+									"key": "destination",
+									"value": "{{flightSearchOrigin}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticket",
+			"item": [
+				{
+					"name": "SaveTicket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cardNumber\": \"1238-9034-5629-4857\",\n  \"flightId\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/tickets",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchTicket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tickets/search?ticketNumber={{searchTicketNumber}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"search"
+							],
+							"query": [
+								{
+									"key": "ticketNumber",
+									"value": "{{searchTicketNumber}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tickets",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTicket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/tickets/{{searchTicketNumber}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"tickets",
+								"{{searchTicketNumber}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

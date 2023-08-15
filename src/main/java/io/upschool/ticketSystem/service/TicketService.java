@@ -10,7 +10,6 @@ import io.upschool.ticketSystem.dto.ticket.TicketSaveResponse;
 import io.upschool.ticketSystem.entity.Ticket;
 import io.upschool.ticketSystem.entity.TicketStatus;
 import io.upschool.ticketSystem.exception.CardNumberIsNotValidException;
-import io.upschool.ticketSystem.exception.CustomException;
 import io.upschool.ticketSystem.exception.ResourceNotFoundException;
 import io.upschool.ticketSystem.repository.FlightRepository;
 import io.upschool.ticketSystem.repository.TicketRepository;
@@ -67,7 +66,7 @@ public class TicketService {
         return Collections.emptyList();
     }
 
-    public Optional<TicketSaveResponse> save(TicketSaveRequest ticketSaveRequestDto) throws ResourceNotFoundException {
+    public Optional<TicketSaveResponse> save(TicketSaveRequest ticketSaveRequestDto) throws ResourceNotFoundException, CardNumberIsNotValidException {
         long flightId = ticketSaveRequestDto.getFlightId();
         var flight = flightRepository.findById(flightId);
         var ticketNumber = String.valueOf(generateTicketNumber());
@@ -140,11 +139,10 @@ public class TicketService {
 
     }
 
-    public String maskedCardNumber(String cardNumber) {
+    public String maskedCardNumber(String cardNumber) throws CardNumberIsNotValidException {
 
         if (cardNumber == null || cardNumber.length() > 20 || cardNumber.length() < 16) {
-            System.out.println("Card numarası 16 karakter olmalıdır.");
-            return null;
+            throw new CardNumberIsNotValidException();
         }
 
 
@@ -158,11 +156,7 @@ public class TicketService {
 
 
         if (maskedCardNumber.length() != 16) {
-          /*  throw new CardNumberIsNotValidException() {
-            }*/
-
-            System.out.println("Card numarası 16 karakter olmalıdır.");
-            return null;
+            throw new CardNumberIsNotValidException();
         }
 
         var prefix = maskedCardNumber.substring(0, 6);
@@ -188,30 +182,30 @@ public class TicketService {
             throw new ResourceNotFoundException();
         }
 
-            var ticket = optionalTicket.get();
-            var response = new TicketGetResponse(
-                    ticket.getId(),
-                    ticket.getTicketNumber(),
-                    ticket.getCardNumber(),
-                    new FlightGetResponse(
-                            ticket.getFlight().getId(),
-                            ticket.getFlight().getFlightNumber(),
-                            new AirportGetResponse(ticket.getFlight().getOriginAirport().getId(),
-                                    ticket.getFlight().getOriginAirport().getName(),
-                                    ticket.getFlight().getOriginAirport().getCity()),
-                            new AirportGetResponse(ticket.getFlight().getDestinationAirport().getId(),
-                                    ticket.getFlight().getDestinationAirport().getName(),
-                                    ticket.getFlight().getDestinationAirport().getCity()),
-                            new AirplaneGetResponse(ticket.getFlight().getAirplane().getId(),
-                                    ticket.getFlight().getAirplane().getName(),
-                                    ticket.getFlight().getAirplane().getCapacity(),
-                                    new AirlineCompanyGetResponse(ticket.getFlight().getAirplane().getAirlineCompany().getId(),
-                                            ticket.getFlight().getAirplane().getAirlineCompany().getName()))
-                    )
+        var ticket = optionalTicket.get();
+        var response = new TicketGetResponse(
+                ticket.getId(),
+                ticket.getTicketNumber(),
+                ticket.getCardNumber(),
+                new FlightGetResponse(
+                        ticket.getFlight().getId(),
+                        ticket.getFlight().getFlightNumber(),
+                        new AirportGetResponse(ticket.getFlight().getOriginAirport().getId(),
+                                ticket.getFlight().getOriginAirport().getName(),
+                                ticket.getFlight().getOriginAirport().getCity()),
+                        new AirportGetResponse(ticket.getFlight().getDestinationAirport().getId(),
+                                ticket.getFlight().getDestinationAirport().getName(),
+                                ticket.getFlight().getDestinationAirport().getCity()),
+                        new AirplaneGetResponse(ticket.getFlight().getAirplane().getId(),
+                                ticket.getFlight().getAirplane().getName(),
+                                ticket.getFlight().getAirplane().getCapacity(),
+                                new AirlineCompanyGetResponse(ticket.getFlight().getAirplane().getAirlineCompany().getId(),
+                                        ticket.getFlight().getAirplane().getAirlineCompany().getName()))
+                )
 
-            );
+        );
 
-            return Optional.of(response);
+        return Optional.of(response);
     }
 
 

@@ -1,13 +1,15 @@
 package io.upschool.ticketSystem.controller;
 
 
-import io.upschool.ticketSystem.dto.airlineCompany.AirlineCompanyGetResponse;
+import io.upschool.ticketSystem.dto.NotOkResponse;
 import io.upschool.ticketSystem.dto.airplane.*;
 import io.upschool.ticketSystem.exception.ResourceNotFoundException;
 import io.upschool.ticketSystem.service.AirplaneService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,8 +46,11 @@ public class AirplaneController {
     }
 
     @PostMapping
-    public ResponseEntity<AirplaneSaveResponse> addAirline(@RequestBody AirplaneSaveRequest request) throws ResourceNotFoundException {
+    public ResponseEntity<AirplaneSaveResponse> addAirplane(@Valid @RequestBody AirplaneSaveRequest request, Errors errors) throws ResourceNotFoundException {
 
+        if (errors.hasErrors()) {
+            return new ResponseEntity(new NotOkResponse(400, errors), HttpStatus.BAD_REQUEST);
+        }
         var response = airplaneService.save(request);
 
         return ResponseEntity.status(HttpStatus.OK).body(response.get());
@@ -53,8 +58,11 @@ public class AirplaneController {
     }
 
     @PutMapping
-    public ResponseEntity<AirplaneUpdateResponse> updateAirplane(@RequestBody AirplaneUpdateRequest request) throws ResourceNotFoundException {
+    public ResponseEntity<AirplaneUpdateResponse> updateAirplane(@Valid @RequestBody AirplaneUpdateRequest request, Errors errors) throws ResourceNotFoundException {
 
+        if (errors.hasErrors()) {
+            return new ResponseEntity(new NotOkResponse(400, errors), HttpStatus.BAD_REQUEST);
+        }
         var response = airplaneService.updateAirplane(request);
         return ResponseEntity.status(HttpStatus.OK).body(response.get());
 
